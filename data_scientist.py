@@ -123,6 +123,9 @@ class DataScientist:
             
         if show_plot:
             plt.show()
+        else:
+            # Close figure to prevent memory leak when not showing
+            plt.close(fig)
         
         # Create result DataFrame
         result_df = pd.DataFrame({
@@ -333,7 +336,7 @@ def generate_sample_sales_data(n_records: int = 1000) -> pd.DataFrame:
         'Quarter': np.random.choice(quarters, n_records),
         'Sales': np.random.exponential(1000, n_records) + 100,
         'Quantity': np.random.randint(1, 100, n_records),
-        'Date': pd.date_range('2023-01-01', periods=n_records, freq='D')[:n_records]
+        'Date': pd.date_range('2023-01-01', periods=n_records, freq='D')
     }
     
     return pd.DataFrame(data)
